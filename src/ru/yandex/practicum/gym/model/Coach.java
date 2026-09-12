@@ -1,8 +1,8 @@
-package ru.yandex.practicum.gym;
+package ru.yandex.practicum.gym.model;
 
 import java.util.Objects;
 
-public class Coach {
+public class Coach{
 
     //фамилия
     private String surname;
@@ -40,5 +40,10 @@ public class Coach {
 
     public String getMiddleName() {
         return middleName;
+    }
+
+    @Override
+    public String toString() {
+        return surname + " "+ name;
     }
 }

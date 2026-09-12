@@ -1,4 +1,4 @@
-package ru.yandex.practicum.gym;
+package ru.yandex.practicum.gym.model;
 
 import java.util.Objects;
 
@@ -31,6 +31,17 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
     @Override
     public int hashCode() {
         return Objects.hash(hours, minutes);
+    }
+
+    @Override
+    public String toString() {
+        if (hours < 10) {
+            return "0"+ hours + ":"+ minutes;
+        } else if (minutes < 10) {
+            return hours + ":"+ "0" + minutes;
+        } else {
+            return hours + ":" + minutes;
+        }
     }
 
     public int getHours() {

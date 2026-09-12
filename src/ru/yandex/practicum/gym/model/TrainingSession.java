@@ -1,4 +1,4 @@
-package ru.yandex.practicum.gym;
+package ru.yandex.practicum.gym.model;
 
 public class TrainingSession {
 
@@ -32,5 +32,10 @@ public class TrainingSession {
 
     public TimeOfDay getTimeOfDay() {
         return timeOfDay;
+    }
+
+    @Override
+    public String toString() {
+        return "TrainingSession {group='" + group + "', coach=" + coach + "}";
     }
 }
