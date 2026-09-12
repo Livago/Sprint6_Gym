@@ -2,7 +2,7 @@ package ru.yandex.practicum.gym.model;
 
 import java.util.Objects;
 
-public class Coach{
+public class Coach {
 
     //фамилия
     private String surname;
@@ -44,6 +44,6 @@ public class Coach{
 
     @Override
     public String toString() {
-        return surname + " "+ name;
+        return surname + " " + name;
     }
 }
