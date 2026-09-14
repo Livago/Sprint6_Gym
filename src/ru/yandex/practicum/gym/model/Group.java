@@ -1,4 +1,4 @@
-package ru.yandex.practicum.gym;
+package ru.yandex.practicum.gym.model;
 
 public class Group {
     //название группы
@@ -24,5 +24,10 @@ public class Group {
 
     public int getDuration() {
         return duration;
+    }
+
+    @Override
+    public String toString() {
+        return title;
     }
 }
