@@ -1,6 +1,7 @@
 package ru.yandex.practicum.gym;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.gym.model.*;
 
@@ -11,6 +12,7 @@ import java.util.TreeMap;
 
 public class TimetableTest {
 
+    @DisplayName("Получение одной тренировки из расписания")
     @Test
     void testGetTrainingSessionsForDaySingleSession() {
         Timetable timetable = new Timetable();
@@ -29,6 +31,7 @@ public class TimetableTest {
         Assertions.assertEquals(List.of(trainingSession), sessionsForDay.get(new TimeOfDay(13, 0)));
     }
 
+    @DisplayName("Получение списка тренировок (Пересечение по времени)")
     @Test
     void testGetTrainingSessionsForDayMultipleSessionsSortedByTime() {
         Timetable timetable = new Timetable();
@@ -51,6 +54,7 @@ public class TimetableTest {
                 new ArrayList<>(sessionsForDay.keySet()));
     }
 
+    @DisplayName("Получение null при запросе тренировки из несуществующего дня")
     @Test
     void testGetTrainingSessionsForDayWithoutSessionsReturnsNull() {
         Timetable timetable = new Timetable();
@@ -65,6 +69,7 @@ public class TimetableTest {
         Assertions.assertNull(timetable.getTrainingSessionsForDay(DayOfWeek.TUESDAY));
     }
 
+    @DisplayName("Получение тренировочной сессии на определенное время")
     @Test
     void testGetTrainingSessionsForDayAndTimeSingleSession() {
         Timetable timetable = new Timetable();
@@ -82,6 +87,7 @@ public class TimetableTest {
         Assertions.assertEquals(List.of(trainingSession), sessions);
     }
 
+    @DisplayName("Получение тренировочных сессий на определенное время (Несколько тренировок)")
     @Test
     void testGetTrainingSessionsForDayAndTimeMultipleSessionsAtSameTime() {
         Timetable timetable = new Timetable();
@@ -104,6 +110,7 @@ public class TimetableTest {
         Assertions.assertEquals(List.of(firstTrainingSession, secondTrainingSession), sessions);
     }
 
+    @DisplayName("Получение исклучение при запросе несуществующей сессии")
     @Test
     void testGetTrainingSessionsForDayAndTimeWithoutSessionsThrowsException() {
         Timetable timetable = new Timetable();
@@ -119,6 +126,7 @@ public class TimetableTest {
                 () -> timetable.getTrainingSessionsForDayAndTime(DayOfWeek.MONDAY, new TimeOfDay(14, 0)));
     }
 
+    @DisplayName("Получение пустого HashMap если тренировок нет")
     @Test
     void testGetCountByCoachesForEmptyTimetable() {
         Timetable timetable = new Timetable();
@@ -128,6 +136,7 @@ public class TimetableTest {
         Assertions.assertTrue(countByCoaches.isEmpty());
     }
 
+    @DisplayName("Получение статистики по тренеру")
     @Test
     void testGetCountByCoachesForSingleCoach() {
         Timetable timetable = new Timetable();
@@ -148,6 +157,7 @@ public class TimetableTest {
         Assertions.assertEquals(3, countByCoaches.get(coach));
     }
 
+    @DisplayName("Получение статистики по тренерам в порядке убывания")
     @Test
     void testGetCountByCoachesSortedBySessionsCountDescending() {
         Timetable timetable = new Timetable();

@@ -6,16 +6,20 @@ import java.util.stream.Collectors;
 public class Timetable {
 
     private HashMap<DayOfWeek, TreeMap<TimeOfDay, List<TrainingSession>>> timetable = new HashMap<DayOfWeek, TreeMap<TimeOfDay, List<TrainingSession>>>();
+    private HashMap<Coach, Integer> coachesCounter = new HashMap<Coach, Integer>();
 
     public void addNewTrainingSession(TrainingSession trainingSession) {
         timetable.computeIfAbsent(trainingSession.getDayOfWeek(), d -> new TreeMap<>())
                 .computeIfAbsent(trainingSession.getTimeOfDay(), d -> new ArrayList<>())
                 .add(trainingSession);
 
+        Coach currentCoach = trainingSession.getCoach();
+        coachesCounter.put(currentCoach, coachesCounter.getOrDefault(currentCoach, 0) + 1);
+
         // Здесь мы сохраняем занятия:
         // computeIfAbsent (НЕ БЫЛО В КУРСЕ!) - получаем TreeMap по DayOfWeek или создаем новую
         // computeIfAbsent - получаем ArrayList или создаем новый
-        // С помощью add кладем найденный/созданный на прошлом шаге AttayList -> TreeMap -> HashMap
+        // С помощью add кладем найденный/созданный на прошлом шаге ArrayList -> TreeMap -> HashMap
 
         // В TimeOfDay уже реализован Comparable<TimeOfDay>, поэтому TreeMap будет отсортирован при создании или добавлении
     }
@@ -45,18 +49,7 @@ public class Timetable {
     }
 
     public HashMap<Coach, Integer> getCountByCoaches() {
-        HashMap<Coach, Integer> coachesCount = new HashMap<>();
-
-
-        for (TreeMap<TimeOfDay, List<TrainingSession>> sessionsForDay : timetable.values()) {
-            for (List<TrainingSession> sessions : sessionsForDay.values()) {
-                for (TrainingSession s : sessions) {
-                    coachesCount.merge(s.getCoach(), 1, Integer::sum); // Почему то в курсе не рассказали про merge, хотя удобно
-                }
-            }
-        }
-
-        return coachesCount.entrySet().stream()
+        return coachesCounter.entrySet().stream()
                 .sorted(Map.Entry.<Coach, Integer>comparingByValue().reversed())
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
